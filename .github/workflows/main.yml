@@ -1,0 +1,18 @@
+name: Ilk Otomasyonum
+
+# Ne zaman calissin?
+on:
+  push:
+    branches: [ "main" ] # Sadece main koluna kod gelince
+
+jobs:
+  build_isleri:
+    runs-on: ubuntu-latest # GitHub bize bir Linux makine versin
+    steps:
+      - name: Kodu kopyala
+        uses: actions/checkout@v3 # Benim kodlarimi o makineye cek
+
+      - name: Docker Imajini Test Et
+        run: |
+          docker build -t test-imaji .
+          echo "Usta, imaj sorunsuz build oldu!"
