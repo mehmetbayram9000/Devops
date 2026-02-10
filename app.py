@@ -3,14 +3,15 @@ from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
+def home():
     return """
-    <body style='background-color: #2c3e50; color: white; font-family: sans-serif; text-align: center; padding-top: 50px;'>
-        <h1>🚀 Mehmet Bayram DevOps Projesi v2</h1>
-        <p>GitHub Actions ile otomatik build edildi.</p>
-        <p>Docker ile GHCR üzerinden çekildi ve çalıştırıldı.</p>
-        <div style='background: #e74c3c; padding: 10px; display: inline-block; border-radius: 5px;'>
-            <strong>Durum: Konteynır Canlı!</strong>
+    <body style='background-color: #1a1a1a; color: #00ff00; font-family: monospace; text-align: center; padding: 50px;'>
+        <h1>🚀 MEHMET BAYRAM DEVOPS TERMINAL 🚀</h1>
+        <hr style='border: 1px solid #333;'>
+        <p style='font-size: 20px;'>Sistem Durumu: <b>KONTEYNIR CANLI</b></p>
+        <p>GitHub Actions -> GHCR -> Docker VM</p>
+        <div style='border: 2px solid #00ff00; display: inline-block; padding: 20px;'>
+            CI/CD Boru Hattı Başarıyla Kuruldu!
         </div>
     </body>
     """
