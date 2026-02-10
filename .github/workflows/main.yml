@@ -21,10 +21,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }} # Bunu sen olusturmadın, GitHub otomatik verir
 
-      - name: Build et ve Pushla
+    - name: Build and Push
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          # Imaj adını GitHub kullanıcı adınla eşliyoruz
-          tags: ghcr.io/${{ github.repository }}:latest
+          # Burayı tamamen küçük harf yaptık:
+          tags: ghcr.io/mehmetbayram9000/devops:latest
