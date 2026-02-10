@@ -7,24 +7,23 @@ on:
 jobs:
   push_to_ghcr:
     runs-on: ubuntu-latest
-    permissions: # GitHub deposuna yazma izni veriyoruz
+    permissions:
       contents: read
       packages: write
     steps:
       - name: Kodu Cek
         uses: actions/checkout@v3
 
-      - name: GitHub Container Registry'ye Login Ol
+      - name: GHCR Login
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }} # Bunu sen olusturmadın, GitHub otomatik verir
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build et ve Pushla
+      - name: Build and Push
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
-          # Imaj adını GitHub kullanıcı adınla eşliyoruz
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/mehmetbayram9000/devops:latest
