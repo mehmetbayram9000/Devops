@@ -1,18 +1,30 @@
-name: Ilk Otomasyonum
+name: GitHub Deposuna Imaj Yukle
 
-# Ne zaman calissin?
 on:
   push:
-    branches: [ "main" ] # Sadece main koluna kod gelince
+    branches: [ "main" ]
 
 jobs:
-  build_isleri:
-    runs-on: ubuntu-latest # GitHub bize bir Linux makine versin
+  push_to_ghcr:
+    runs-on: ubuntu-latest
+    permissions: # GitHub deposuna yazma izni veriyoruz
+      contents: read
+      packages: write
     steps:
-      - name: Kodu kopyala
-        uses: actions/checkout@v3 # Benim kodlarimi o makineye cek
+      - name: Kodu Cek
+        uses: actions/checkout@v3
 
-      - name: Docker Imajini Test Et
-        run: |
-          docker build -t test-imaji .
-          echo "Usta, imaj sorunsuz build oldu!"
+      - name: GitHub Container Registry'ye Login Ol
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }} # Bunu sen olusturmadın, GitHub otomatik verir
+
+      - name: Build et ve Pushla
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          # Imaj adını GitHub kullanıcı adınla eşliyoruz
+          tags: ghcr.io/${{ github.repository }}:latest
