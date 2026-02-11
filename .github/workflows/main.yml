@@ -37,8 +37,8 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_SSH_KEY }}
-          script: |
+            script: |
+            cd ~/Devops
             sudo docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-            sudo docker rm -f web_sunucum || true
-            sudo docker pull ghcr.io/mehmetbayram9000/devops:latest
-            sudo docker run -d -p 5000:5000 --name web_sunucum ghcr.io/mehmetbayram9000/devops:latest
+            sudo docker-compose pull
+            sudo docker-compose up -d --remove-orphans

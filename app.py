@@ -6,7 +6,7 @@ app = Flask(__name__)
 def home():
     return """
     <body style='background-color: #1a1a1a; color: #00ff00; font-family: monospace; text-align: center; padding: 50px;'>
-        <h1>🚀 OTO sistem aktif 🚀</h1>
+        <h1>🚀 MEMO HG 🚀</h1>
         <hr style='border: 1px solid #333;'>
         <p style='font-size: 20px;'>Sistem Durumu: <b>KONTEYNIR CANLI</b></p>
         <p>GitHub Actions -> GHCR -> Docker VM</p>
