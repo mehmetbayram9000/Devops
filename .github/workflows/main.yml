@@ -38,11 +38,7 @@ jobs:
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_SSH_KEY }}
             script: |
-            # Klasöre gir (Eger yoksa hata vermemesi icin || true ekledik)
-            cd ~/Devops || cd Devops
-            # GHCR'ye giris yap
+            cd ~/Devops
             sudo docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-            # Yeni imajlari cek
             sudo docker-compose pull
-            # Sistemi ayaga kaldir
             sudo docker-compose up -d --remove-orphans
