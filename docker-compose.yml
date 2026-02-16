@@ -1,17 +1,27 @@
-version: '3'
 services:
   web_sunucum:
     image: ghcr.io/mehmetbayram9000/devops:latest
-    container_name: web_sunucum
+    expose:
+      - "5000"
     restart: always
 
-  nginx_sunucum:
+  nginx_lb:
     image: nginx:latest
-    container_name: nginx_sunucum
     ports:
       - "80:80"
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - web_sunucum
+
+  veritabani:
+    image: redis:latest
+    volumes:
+      - redis_verisi:/data
     restart: always
+
+# İŞTE BURASI HAYAT KURTARAN NOKTA:
+volumes:
+  redis_verisi:
+    environment:
+      - REDIS_URL=veritabani
