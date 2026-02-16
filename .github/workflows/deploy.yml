@@ -14,7 +14,8 @@ jobs:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
           key: ${{ secrets.AWS_SSH_KEY }}
-          script: |
-            cd ~/devops
+            script: |
+            cd /home/ubuntu/devops
             git pull origin main
-            bash deploy.sh
+            chmod +x deploy.sh
+            ./deploy.sh
