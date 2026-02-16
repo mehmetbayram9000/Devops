@@ -1,16 +1,13 @@
 #!/bin/bash
-
-# 1. Klasöre gir ve hata varsa dur
+# 1. Tam yola git
 cd /home/ubuntu/devops || exit
 
-# 2. GitHub'dan en son hali çek
+# 2. Kodları güncelle
 git pull origin main
 
-# 3. Eski yapılandırmayı temizle (Hata verse de devam et)
+# 3. Eski yapıyı temizle (Hata verse de durma)
 sudo docker compose down || true
 
-# 4. En güncel imajları çek
+# 4. Yeni imajları çek ve 5 adet ayağa kaldır
 sudo docker compose pull
-
-# 5. Sistemi 5 konteynırla ayağa kaldır
 sudo docker compose up -d --scale web_sunucum=5
