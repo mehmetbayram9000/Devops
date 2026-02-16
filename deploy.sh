@@ -1,13 +1,13 @@
 #!/bin/bash
-# 1. Tam yola git
+# Tam yola git (Küçük harf 'devops' olduğuna emin ol)
 cd /home/ubuntu/devops || exit
 
-# 2. Kodları güncelle
+# GitHub'dan en son hali çek
 git pull origin main
 
-# 3. Eski yapıyı temizle (Hata verse de durma)
-sudo docker compose down || true
+# Eski konteynırları temizle (Yoksa bile hata verme, devam et)
+docker compose down || true
 
-# 4. Yeni imajları çek ve 5 adet ayağa kaldır
-sudo docker compose pull
-sudo docker compose up -d --scale web_sunucum=5
+# Yeni imajı çek ve 5 tane ayağa kaldır
+docker compose pull
+docker compose up -d --scale web_sunucum=5
